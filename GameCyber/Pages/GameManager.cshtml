@@ -1,0 +1,247 @@
+﻿@page
+@using GameCyber.Entities
+@model GameCyber.Pages.GameManagerModel
+@{
+}
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico in the root directory -->
+    <link href="~/images/favicon.ico" type="img/x-icon" rel="shortcut icon">
+    <!-- All css files are included here. -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/qanto.css">
+    <link rel="stylesheet" href="~/css/bauhaus93.css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/icofont.min.css">
+    <link rel="stylesheet" href="~/css/plugins.css">
+    <link rel="stylesheet" href="~/css/helper.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- Modernizr JS -->
+    <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<style>
+    table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+</style>
+<body>
+
+    <div id="main-wrapper">
+
+        <!--Header section start-->
+        <header class="header header-static bg-black header-sticky">
+            <div class="default-header menu-right">
+                <div class="container container-1520">
+                    <div class="row">
+
+                        <!--Logo start-->
+                        <div class="col-12 col-md-3 col-lg-3 order-md-1 order-lg-1 mt-20 mb-20">
+                            <div class="logo">
+                                <a href="index.html"><img src="~/images/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <!--Logo end-->
+                        <!--Menu start-->
+                        <div class="col-lg-6 col-12 order-md-3 order-lg-2 d-flex justify-content-center">
+                            <nav class="main-menu menu-style-2">
+                                <ul>
+                                    <li><a href="/Dashboard">UserManager</a></li>
+                                    <li><a href="/Chat">Chat</a></li>
+                                    <li><a href="/GameManager">GameManager</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!--Menu end-->
+                        <!--Header Right Wrap-->
+                        <div class="col-12 col-md-9 order-md-2 order-lg-3 col-lg-3">
+                            <div class="header-right-wrap">
+                                <ul>
+                                    @if (@Model.User != null)
+                                    {
+                                        <li><a href="#">Hi @Model.User.Fullname</a></li>
+                                        <li><a href="/Index?Handler=Logout">Logout</a></li>
+                                    }
+                                    <li class="header-search">
+                                        <a class="header-search-toggle" href="#"><i class="icofont-search-2"></i></a>
+                                        <div class="header-search-form">
+                                            <form action="#">
+                                                <input type="text" placeholder="Type and hit enter">
+                                                <button><i class="icofont-search"></i></button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--Header Right Wrap-->
+                    </div>
+
+                    <!--Mobile Menu start-->
+                    <div class="row">
+                        <div class="col-12 d-flex d-lg-none">
+                            <div class="mobile-menu"></div>
+                        </div>
+                    </div>
+                    <!--Mobile Menu end-->
+
+                </div>
+            </div>
+        </header>
+        <!--Header section end-->
+        <!--Projects section start-->
+        <!--Login Section Start-->
+        <div class="login-section section pt-95 pt-lg-75 pt-md-65 pt-sm-55 pt-xs-45">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-12 d-flex">
+                        <div class="card shadow mb-4 mt-4" style="width: 100%;margin-top:32px;">
+                            <div style="margin-left:16px">
+                                <form method="post" asp-page-handler="SearchGame">
+                                    <div class="mb-3 mt-4">
+                                        <input type="text" value="" placeholder="Enter name of game wanna search ?" class="form-control" id="tb10" aria-describedby="emailHelp" name="adGameSearch">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </form>
+                            </div>
+                            <div class="card-body" id="cardBody">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#ID</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Url</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Author</th>
+                                            <th scope="col">ImageUrl</th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.gameViewModel is null || Model.gameViewModel.ListGames.Count == 0)
+                                        {
+                                            <p>khong co game nao</p>
+                                        }
+                                        @foreach (Game g in Model.gameViewModel.ListGames)
+                                        {
+                                            <tr>
+                                                <td>@g.Id</td>
+                                                <td>@g.Name</td>
+                                                <td class="text-truncate">@g.Url</td>
+                                                <td class="text-truncate">@g.Title</td>
+                                                <td class="text-truncate">@g.Description</td>
+                                                <td>@g.Author</td>
+                                                <td class="text-truncate">@g.ImageUrl</td>
+
+                                                <td><a class="addCard" href="/GameManager?Handler=Update&id=@g.Id"><strong>Edit</strong></a></td>
+                                                <td><a class="addCard" href="/GameManager?Handler=Delete&id=@g.Id"><strong>Delete</strong></a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="editCard">
+                    <!-- Login -->
+                    <div class="col-md-6 col-12 d-flex">
+                        <div class="gilbard-login">
+
+                            <h3>Create new Game</h3>
+
+                            <!-- Login Form -->
+                            <form method="post" asp-page-handler="CreateGame">
+                                <div class="row">
+                                    <div class="col-12 mb-30"><input type="text" placeholder="Enter Name" name="adGName"></div>
+                                    <div class="col-12 mb-20"><input type="text" placeholder="Enter Url" name="adGUrl"></div>
+                                    <div class="col-12 mb-20"><input type="text" placeholder="Enter Title" name="adGTitle"></div>
+                                    <div class="col-12 mb-20"><input type="text" placeholder="Enter Description" name="adGDes"></div>
+                                    <div class="col-12 mb-20"><input type="text" placeholder="Enter Author Name" name="adGAuthor"></div>
+                                    <div class="col-12 mb-20"><input type="text" placeholder="Enter Image Url" name="adGImg"></div>
+                                    <div class="col-12"><input type="submit" value="Save"></div>
+                                </div>
+                            </form>
+                            <p>@ViewData["RegisterMsg"]</p>
+                        </div>
+                    </div>
+                    @if (Model.gameViewModel.GameEdit != null)
+                    {
+                        <div class="col-md-6 col-12 d-flex">
+                            <div class="card shadow mb-4 mt-4" style="width: 100%;margin-top:32px;">
+
+                                <div class="card-body" id="cardBody">
+                                    <h3 class="text-">Edit Game</h3>
+                                    <form method="post" asp-page-handler="EditGame">
+                                        <input type="hidden" value="@Model.gameViewModel.GameEdit.Id" class="form-control" id="tb0" aria-describedby="emailHelp" name="edId">
+                                        <div class="mb-3">
+                                            <label for="tb1" class="form-label">Name</label>
+                                            <input type="text" value="@Model.gameViewModel.GameEdit.Name" class="form-control" id="tb1" aria-describedby="emailHelp" name="edName">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tb1" class="form-label">Title</label>
+                                            <input type="text" value="@Model.gameViewModel.GameEdit.Title" class="form-control" id="tb1" aria-describedby="emailHelp" name="edTitle">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tb1" class="form-label">Description</label>
+                                            <input type="text" value="@Model.gameViewModel.GameEdit.Description" class="form-control" id="tb1" aria-describedby="emailHelp" name="edDescription">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tb2" class="form-label">Author</label>
+                                            <input type="text" value="@Model.gameViewModel.GameEdit.Author" class="form-control" id="tb2" name="edAuthor">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tb2" class="form-label">Game url</label>
+                                            <input type="text" value="@Model.gameViewModel.GameEdit.Url" class="form-control" id="tb2" name="edUrl">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tb2" class="form-label">Image url</label>
+                                            <input type="text" value="@Model.gameViewModel.GameEdit.ImageUrl" class="form-control" id="tb2" name="edImageUrl">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </form>
+                                    <p>@ViewData["EditMsg"]</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+            </div>
+            <!--Login Section End-->
+
+
+        </div>
+
+        <!--Projects section end-->
+
+    </div>
+
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <!-- All jquery file included here -->
+    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/main.js"></script>
+    <script>
+                $(document).ready(function () {
+            // Handler for .ready() called.
+            $('html, body').animate({
+                scrollTop: $('#editCard').offset().top
+            }, 'slow');
+        });
+    </script>
+</body>
+</html>

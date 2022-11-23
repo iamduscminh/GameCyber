@@ -1,0 +1,227 @@
+﻿@page
+@using GameCyber.Entities
+@model GameCyber.Pages.DashboardModel
+@{
+    var c = Model.userViewModel.UserEdit;
+    var x = 1;
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Admin Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico in the root directory -->
+    <link href="~/images/favicon.ico" type="img/x-icon" rel="shortcut icon">
+    <!-- All css files are included here. -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/qanto.css">
+    <link rel="stylesheet" href="~/css/bauhaus93.css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/icofont.min.css">
+    <link rel="stylesheet" href="~/css/plugins.css">
+    <link rel="stylesheet" href="~/css/helper.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- Modernizr JS -->
+    <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+
+    <div id="main-wrapper">
+
+        <!--Header section start-->
+        <header class="header header-static bg-black header-sticky">
+            <div class="default-header menu-right">
+                <div class="container container-1520">
+                    <div class="row">
+
+                        <!--Logo start-->
+                        <div class="col-12 col-md-3 col-lg-3 order-md-1 order-lg-1 mt-20 mb-20">
+                            <div class="logo">
+                                <a href="index.html"><img src="~/images/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <!--Logo end-->
+                        <!--Menu start-->
+                        <div class="col-lg-6 col-12 order-md-3 order-lg-2 d-flex justify-content-center">
+                            <nav class="main-menu menu-style-2">
+                                <ul>
+                                    <li><a href="/Dashboard">UserManager</a></li>
+                                    <li><a href="/Chat">Chat</a></li>
+                                    <li><a href="/GameManager">GameManager</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!--Menu end-->
+                        <!--Header Right Wrap-->
+                        <div class="col-12 col-md-9 order-md-2 order-lg-3 col-lg-3">
+                            <div class="header-right-wrap">
+                                <ul>
+                                    @if (@Model.User != null)
+                                    {
+                                        <li><a href="#">Hi @Model.User.Fullname</a></li>
+                                        <li><a href="/Index?Handler=Logout">Logout</a></li>
+                                    }
+                                    <li class="header-search">
+                                        <a class="header-search-toggle" href="#"><i class="icofont-search-2"></i></a>
+                                        <div class="header-search-form">
+                                            <form action="#">
+                                                <input type="text" placeholder="Type and hit enter">
+                                                <button><i class="icofont-search"></i></button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--Header Right Wrap-->
+                    </div>
+
+                    <!--Mobile Menu start-->
+                    <div class="row">
+                        <div class="col-12 d-flex d-lg-none">
+                            <div class="mobile-menu"></div>
+                        </div>
+                    </div>
+                    <!--Mobile Menu end-->
+
+                </div>
+            </div>
+        </header>
+        <!--Header section end-->
+        <!--Projects section start-->
+        <!--Login Section Start-->
+        <div class="login-section section pt-95 pt-lg-75 pt-md-65 pt-sm-55 pt-xs-45">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Login -->
+                    <div class="col-md-5 col-12 d-flex">
+                        <div class="gilbard-login">
+
+                            <h3>Create user account</h3>
+
+                            <!-- Login Form -->
+                            <form method="post" asp-page-handler="CreateUser">
+                                <div class="row">
+                                    <div class="col-12 mb-30"><input type="text" placeholder="Enter username" name="adUName"></div>
+                                    <div class="col-12 mb-20"><input type="password" placeholder="Enter password" name="adPass"></div>
+                                    <div class="col-12 mb-20"><input type="text" placeholder="Enter fullname" name="adFName"></div>
+                                    <div class="col-12 mb-20"><input type="text" placeholder="Enter cash" name="adCash"></div>
+                                    <div class="col-12"><input type="submit" value="Create"></div>
+                                </div>
+                            </form>
+                            <p>@ViewData["RegisterMsg"]</p>
+                        </div>
+                    </div>
+                    <div class="col-md-1 col-12 d-flex">
+                        <div class="login-reg-vertical-boder"></div>
+                    </div>
+                    <div class="col-md-6 col-12 d-flex">
+                        <div class="card shadow mb-4 mt-4" style="width: 100%;margin-top:32px;">
+                            <div style="margin-left:16px">
+                                <form method="post" asp-page-handler="SearchUser">
+                                    <div class="mb-3 mt-4">
+                                        <input type="text" value="" placeholder="Enter username wanna search ?" class="form-control" id="tb10" aria-describedby="emailHelp" name="adUserSearch">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </form>
+                            </div>
+                            <div class="card-body" id="cardBody">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#ID</th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Password</th>
+                                            <th scope="col">Cash</th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.userViewModel is null || Model.userViewModel.ListUsers.Count == 0)
+                                        {
+                                            <p>khong co user nao</p>
+                                        }
+                                        @foreach (User u in Model.userViewModel.ListUsers)
+                                        {
+                                            <tr>
+                                                <td>@u.Id</td>
+                                                <td>@u.Username</td>
+                                                <td>@u.Password</td>
+                                                <td>@u.Cash</td>
+                                                <td><a class="addCard" href="/Dashboard?Handler=Update&id=@u.Id"><strong>Edit</strong></a></td>
+                                                <td><a class="addCard" href="/Dashboard?Handler=Delete&id=@u.Id"><strong>Delete</strong></a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.userViewModel.UserEdit != null)
+                {
+                    <div class="row" id="editCard">
+                        <div class="col-md-3 col-12 d-flex">
+                        </div>
+                        <div class="col-md-6 col-12 d-flex">
+                            <div class="card shadow mb-4 mt-4" style="width: 100%;margin-top:32px;">
+
+                                <div class="card-body" id="cardBody">
+                                    <h3 class="text-">Edit User</h3>
+                                    <form method="post" asp-page-handler="EditUser">
+                                        <input type="hidden" value="@Model.userViewModel.UserEdit.Id" class="form-control" id="tb0" aria-describedby="emailHelp" name="edId">
+                                        <div class="mb-3">
+                                            <label for="tb1" class="form-label">Password</label>
+                                            <input type="text" value="@Model.userViewModel.UserEdit.Password" class="form-control" id="tb1" aria-describedby="emailHelp" name="edPassword">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tb2" class="form-label">Cash</label>
+                                            <input type="text" value="@Model.userViewModel.UserEdit.Cash" class="form-control" id="tb2" name="edCash">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </form>
+                                    <p>@ViewData["EditMsg"]</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-12 d-flex">
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <!--Login Section End-->
+
+
+        </div>
+
+        <!--Projects section end-->
+
+    </div>
+
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <!-- All jquery file included here -->
+    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/main.js"></script>
+    <script>
+                $(document).ready(function () {
+            // Handler for .ready() called.
+            $('html, body').animate({
+                scrollTop: $('#editCard').offset().top
+            }, 'slow');
+        });
+    </script>
+</body>
+</html>
+

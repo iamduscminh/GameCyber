@@ -1,0 +1,224 @@
+﻿@page
+@using GameCyber.Models
+@model GameCyber.Pages.ChatModel
+@{
+}
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico in the root directory -->
+    <link href="~/images/favicon.ico" type="img/x-icon" rel="shortcut icon">
+    <!-- All css files are included here. -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/qanto.css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/icofont.min.css">
+    <link rel="stylesheet" href="~/css/plugins.css">
+    <link rel="stylesheet" href="~/css/helper.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/admin_chat.css">
+    <!-- Modernizr JS -->
+    <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+
+    <div id="main-wrapper">
+
+        <!--Header section start-->
+        <header class="header header-static bg-black header-sticky">
+            <div class="default-header menu-right">
+                <div class="container container-1520">
+                    <div class="row">
+
+                        <!--Logo start-->
+                        <div class="col-12 col-md-3 col-lg-3 order-md-1 order-lg-1 mt-20 mb-20">
+                            <div class="logo">
+                                <a href="index.html"><img src="~/images/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <!--Logo end-->
+                        <!--Menu start-->
+                        <div class="col-lg-6 col-12 order-md-3 order-lg-2 d-flex justify-content-center">
+                            <nav class="main-menu menu-style-2">
+                                <ul>
+                                    <li><a href="/Dashboard">UserManager</a></li>
+                                    <li><a href="/Chat">Chat</a></li>
+                                    <li><a href="/GameManager">GameManager</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!--Menu end-->
+                        <!--Header Right Wrap-->
+                        <div class="col-12 col-md-9 order-md-2 order-lg-3 col-lg-3">
+                            <div class="header-right-wrap">
+                                <ul>
+                                    @if (@Model.User != null)
+                                    {
+                                        <li><a href="#">Hi @Model.User.Fullname</a></li>
+                                        <li><a href="/Index?Handler=Logout">Logout</a></li>
+                                    }
+                                    <li class="header-search">
+                                        <a class="header-search-toggle" href="#"><i class="icofont-search-2"></i></a>
+                                        <div class="header-search-form">
+                                            <form action="#">
+                                                <input type="text" placeholder="Type and hit enter">
+                                                <button><i class="icofont-search"></i></button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--Header Right Wrap-->
+                    </div>
+
+                    <!--Mobile Menu start-->
+                    <div class="row">
+                        <div class="col-12 d-flex d-lg-none">
+                            <div class="mobile-menu"></div>
+                        </div>
+                    </div>
+                    <!--Mobile Menu end-->
+
+                </div>
+            </div>
+        </header>
+        <!--Header section end-->
+        <!--Chat section start-->
+        <div id="chatCard" class="container">
+            <h3 class="mt-1 text-center">Messaging</h3>
+            <div class="messaging">
+                <div class="inbox_msg">
+                    <div class="inbox_people">
+                        <div class="headind_srch">
+                            <div class="recent_heading">
+                                <h4>Recent</h4>
+                            </div>
+                            <div class="srch_bar">
+                                <div class="stylish-input-group">
+                                    <input type="text" class="search-bar" placeholder="Search">
+                                    <span class="input-group-addon">
+                                        <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inbox_chat">
+
+                            <div class="chat_list" data-value="@Model.ChatViewModel.usersChats.FirstOrDefault().Id">
+                                <div class="chat_people">
+                                    <div class="chat_img"> <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" alt="sunil"> </div>
+                                    <div class="chat_ib">
+                                        <h5>@Model.ChatViewModel.usersChats.FirstOrDefault().FullName <span class="chat_date">@Model.ChatViewModel.usersChats.FirstOrDefault().SentDate</span></h5>
+                                        <p>
+                                            @Model.ChatViewModel.usersChats.FirstOrDefault().LastMessage
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            @foreach (UserChatModel user in Model.ChatViewModel.usersChats.Skip(1))
+                            {
+                                <div class="chat_list @(user.Id == Model.ChatViewModel.UserRecievedId ? "active-chat" : "")" data-value="@user.Id">
+                                    <div class="chat_people">
+                                        <div class="chat_img"> <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" alt="sunil"> </div>
+                                        <div class="chat_ib">
+                                            <h5>@user.FullName <span class="chat_date">@user.SentDate</span></h5>
+                                            <p>
+                                                @user.LastMessage
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="mesgs">
+                        <div class="d-flex">
+                            <div class="incoming_msg_img me-3"> <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" alt="sunil"> </div>
+                            <div>
+                                <h4>@Model.ChatViewModel.UserSentName</h4>
+                            </div>
+                        </div>
+
+
+                        <hr />
+                        <div class="msg_history" id="msg_container" style="height:380px;">
+
+
+                            @foreach (MessageModel message in Model.ChatViewModel.messages)
+                            {
+                                @*Received*@
+                                @if (message.UserSentId == Model.ChatViewModel.UserRecievedId)
+                                {
+                                    <div class="incoming_msg">
+                                        <div class="incoming_msg_img"> <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" alt="sunil"> </div>
+                                        <div class="received_msg">
+                                            <div class="received_withd_msg">
+                                                <p>
+                                                    @message.Message
+                                                </p>
+                                            </div>
+                                            <span style="font-size:8px"><em>@message.SentDate</em></span>
+                                        </div>
+                                    </div>
+                                }
+                                @*Send*@
+                                @if (message.UserSentId == Model.ChatViewModel.UserSentId)
+                                {
+                                    <div class="outgoing_msg">
+                                        <div class="sent_msg">
+                                            <p>
+                                                @message.Message
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                        <div class="type_msg">
+                            <form method="post" id="formChat" asp-page-handler="SendMessage">
+
+                                <div class="input_msg_write">
+                                    <input type="text" class="write_msg" id="messageInput" placeholder="Type a message" name="msg" />
+                                    <input type="hidden" class="write_msg" id="userInput" name="userSentId" value="@Model.ChatViewModel.UserSentId" />
+                                    <input type="hidden" class="write_msg" id="userReceive" name="userReceiveId" value="@Model.ChatViewModel.UserRecievedId" />
+                                    <button class="msg_send_btn" id="btn_sendMsg" type="submit" form="formChat"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Chat section end-->
+
+    </div>
+
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <!-- All jquery file included here -->
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="~/js/popper.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/plugins.js"></script>
+<script src="~/js/main.js"></script>
+<script src="~/js/ChatEvent.js"></script>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+<script>
+            $(document).ready(function () {
+        // Handler for .ready() called.
+        $('html, body').animate({
+            scrollTop: $('#chatCard').offset().top
+        }, 'slow');
+    });
+</script>
+</html>

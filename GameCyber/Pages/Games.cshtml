@@ -1,0 +1,489 @@
+﻿@page "{PageIndex=0}"
+@using GameCyber.Entities
+@using GameCyber.Models
+@model GameCyber.Pages.GamesModel
+@addTagHelper *, GameCyber
+@{
+    int totalPage = (int)ViewData["TotalPage"];
+    int curPage = (int)ViewData["CurrentPage"];
+}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Games || Gilbard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico in the root directory -->
+    <link href="~/images/favicon.ico" type="img/x-icon" rel="shortcut icon">
+    <!-- All css files are included here. -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/qanto.css">
+    <link rel="stylesheet" href="~/css/bauhaus93.css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/icofont.min.css">
+    <link rel="stylesheet" href="~/css/plugins.css">
+    <link rel="stylesheet" href="~/css/helper.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/user_chat.css">
+    <!-- Modernizr JS -->
+    <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+
+    <div id="main-wrapper">
+
+        <!--Header section start-->
+        <header class="header header-static bg-black header-sticky">
+            <div class="default-header menu-right">
+                <div class="container container-1520">
+                    <div class="row">
+
+                        <!--Logo start-->
+                        <div class="col-12 col-md-3 col-lg-3 order-md-1 order-lg-1 mt-20 mb-20">
+                            <div class="logo">
+                                <a href="/Home"><img src="~/images/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <!--Logo end-->
+                        <!--Menu start-->
+                        <div class="col-lg-6 col-12 order-md-3 order-lg-2 d-flex justify-content-center">
+                            <nav class="main-menu menu-style-2">
+                                <ul>
+                                    <li><a href="/Home">Home</a></li>
+                                    <li><a href="/Games">Games</a></li>
+                                    <li><a style="color:white;" data-toggle="modal" data-target="#accountModal">Account</a></li>
+                                    <li><a style="color:white;" data-toggle="modal" data-target="#orderModal">Order</a></li>
+                                    <li><a href="/Contact">Contact</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!--Menu end-->
+                        <!--Header Right Wrap-->
+                        <div class="col-12 col-md-9 order-md-2 order-lg-3 col-lg-3">
+                            <div class="header-right-wrap">
+                                <ul>
+                                    @if (@Model.User != null)
+                                    {
+                                        <li><a href="#">Hi @Model.User.Fullname</a></li>
+                                        <li><a href="/Index?Handler=Logout">Logout</a></li>
+                                    }
+                                    <li class="header-search">
+                                        <a class="header-search-toggle" href="#"><i class="icofont-search-2"></i></a>
+                                        <div class="header-search-form">
+                                            <form action="#">
+                                                <input type="text" placeholder="Type and hit enter">
+                                                <button><i class="icofont-search"></i></button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--Header Right Wrap-->
+
+                    </div>
+
+                    <!--Mobile Menu start-->
+                    <div class="row">
+                        <div class="col-12 d-flex d-lg-none">
+                            <div class="mobile-menu"></div>
+                        </div>
+                    </div>
+                    <!--Mobile Menu end-->
+
+                </div>
+            </div>
+        </header>
+        <!--Header section end-->
+        <!--slider section start-->
+        <div class="hero-section section position-relative">
+            <div class="hero-slider">
+                <!--Hero Item start-->
+                <div class="hero-item hero-item-2" style="background-image: url(https://media.zicxa.com/258112)">
+                    <div class="container container-1520">
+                        <div class="row">
+                            <div class="col-12">
+                                <!--Hero Content start-->
+                                <div class="hero-content">
+                                    <h1>AQUA SURVIVE</h1>
+                                    <h2>BETTLE BEGAN’S HERE</h2>
+                                    <a class="df-btn" href="#">Play Now</a>
+                                </div>
+                                <!--Hero Content end-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Hero Item end-->
+                <!--Hero Item start-->
+                <div class="hero-item hero-item-2" style="background-image: url(https://getwalls.io/wallpapers/316943/2020--04--dark-souls-wallpaper-iphone-x-4k-pc.jpg)">
+                    <div class="container container-1520">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <!--Hero Content start-->
+                                <div class="hero-content">
+                                    <h1>THE WITCHER 3</h1>
+                                    <h2>BETTLE BEGAN’S HERE</h2>
+                                    <a class="df-btn" href="#">Play Now</a>
+                                </div>
+                                <!--Hero Content end-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Hero Item end-->
+                <!--Hero Item start-->
+                <div class="hero-item hero-item-2" style="background-image: url(https://wallpaperaccess.com/full/5206957.jpg)">
+                    <div class="container container-1520">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <!--Hero Content start-->
+                                <div class="hero-content">
+                                    <h1>THE LAST DEVIL</h1>
+                                    <h2>BETTLE BEGAN’S HERE</h2>
+                                    <a class="df-btn" href="#">Play Now</a>
+                                </div>
+                                <!--Hero Content end-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Hero Item end-->
+
+            </div>
+        </div>
+        <!--slider section end-->
+        <!--Games Area Start-->
+        <div id="GameSection" class="games-area section pt-85 pt-lg-65 pt-md-55 pt-sm-55 pt-xs-45">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <!--Game Toolbar Start-->
+                        <div class="game-topbar-wrapper d-md-flex justify-content-md-between align-items-center">
+                            <div class="game-search-box">
+                                <h3>search games</h3>
+                                <form method="post" asp-page-handler="SearchGame">
+                                    <input type="text" name="game_search" placeholder="Enter games name">
+                                    <button type="submit"><i class="icofont-search-2"></i></button>
+                                </form>
+                            </div>
+
+                        </div>
+                        <!--Game Toolbar End-->
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (Game g in Model.ListGame)
+                    {
+                        <div class="col-lg-4 col-md-6">
+                            <!--Single Game Start-->
+                        <div class="single-game mb-50">
+                                <div class="game-img">
+                                    <a href="/GameDetail/@g.Id"><img src="@g.ImageUrl" alt=""></a>
+                                </div>
+                                <div class="game-content">
+                                    <h4><a href="games-details.html">@g.Name</a></h4>
+                                    <span>@g.Rating turns</span>
+                                </div>
+                            </div>
+                            <!--Single Game End-->
+                    </div>
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="blog-pagination text-center">
+                            @if (totalPage > 1)
+                            {
+                                <pager total-page='@totalPage' url='/Games'
+                                   current-page='@curPage' active-class="active">
+                                </pager>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Games Area End-->
+        <!--Projects section start-->
+        <div class="newslatter-section newslatter-section-tow section pt-xs-50 pb-xs-50">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-12">
+                        <!--News Latter Area Start-->
+                        <div class="news-latter-area newslatter-black">
+                            <div class="news-latter-box">
+                                <h3>SUBSCRIBE OUR NEWSLETTER, GET ALL <br> LATEST NEWS, UPDATE, VIDEOS AND OFFERS </h3>
+                                <form action="#">
+                                    <input type="text" placeholder="Enter your email here">
+                                </form>
+                            </div>
+                        </div>
+                        <!--News Latter Area End-->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!--Projects section end-->
+        <!--Footer section start-->
+        <footer class="footer-section style-2 section bg-theme" style="background-image: url(~/images/bg/footer-bg.jpg)">
+
+            <!--Footer Top start-->
+            <div class="footer-top section pt-175 pt-lg-150 pt-md-125 pt-sm-110 pt-xs-40 pb-80 pb-lg-70 pb-md-60 pb-sm-15 pb-xs-40">
+                <div class="container container-1520">
+                    <div class="row justify-content-lg-between">
+
+                        <!--Footer Widget start-->
+                        <div class="col-xl-3 col-lg-2 col-md-3">
+                            <div class="footer-widget">
+                                <div class="footer-logo">
+                                    <a href="index.html"><img src="~/images/logo.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Footer Widget end-->
+                        <!--Footer Widget start-->
+                        <div class="col-xl-6 col-lg-6 col-md-9">
+                            <div class="footer-widget">
+                                <div class="footer-nav">
+                                    <nav>
+                                        <ul>
+                                            <li><a href="#">forums</a></li>
+                                            <li><a href="#">demo</a></li>
+                                            <li><a href="#">support</a></li>
+                                            <li><a href="#">terms & conditions</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Footer Widget end-->
+                        <!--Footer Widget start-->
+                        <div class="col-xl-3 col-lg-4 col-md-12">
+                            <div class="footer-widget">
+                                <div class="footer-social">
+                                    <span>follow us:</span>
+                                    <ul>
+                                        <li><a href="#"><i class="icofont-facebook"></i></a></li>
+                                        <li><a href="#"><i class="icofont-twitter"></i></a></li>
+                                        <li><a href="#"><i class="icofont-instagram"></i></a></li>
+                                        <li><a href="#"><i class="icofont-youtube-play"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Footer Widget end-->
+
+                    </div>
+                </div>
+            </div>
+            <!--Footer Top end-->
+            <!--Footer bottom start-->
+            <div class="footer-bottom border-color section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="copyright text-center">
+                                <a target="_blank" href="https://www.templateshub.net">Templates Hub</a>All rights reserved.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Footer bottom end-->
+
+        </footer>
+        <!--Footer section end-->
+
+    </div>
+
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <!-- Modal Account-->
+    <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Your Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex">
+                        <h5>User:&emsp;</h5>
+                        <h5>@Model.User.Fullname</h5>
+                    </div>
+                    <div class="d-flex">
+                        <h5>Cash:&emsp;</h5>
+                        <h5><span id="userCash">@Model.User.Cash</span> &nbsp;<strong>VND</strong></h5>
+                    </div>
+                    <div class="d-flex">
+                        <h5>Time Remain:&emsp;</h5>
+                        <h5><span id="userTimeRemain">@Model.BaseViewModel.userTimeRemain</span></h5>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Order-->
+    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:800px;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-md-3">
+                        <h3 class=" text-center">Menu</h3>
+                        <br />
+                        <div class="d-flex">
+                            <h5>Coca:&emsp;</h5>
+                            <h5>10000 &nbsp;<strong>VND</strong></h5>
+                        </div>
+                        <div class="d-flex">
+                            <h5>Sting:&emsp;</h5>
+                            <h5>10000 &nbsp;<strong>VND</strong></h5>
+                        </div>
+                        <div class="d-flex">
+                            <h5>Pepsico:&emsp;</h5>
+                            <h5>12000 &nbsp;<strong>VND</strong></h5>
+                        </div>
+                        <div class="d-flex">
+                            <h5>Tra chanh:&emsp;</h5>
+                            <h5>15000 &nbsp;<strong>VND</strong></h5>
+                        </div>
+                        <br />
+                        <div class="d-flex">
+                            <h5>My xao:&emsp;</h5>
+                            <h5>25000 &nbsp;<strong>VND</strong></h5>
+                        </div>
+                        <div class="d-flex">
+                            <h5>My tron:&emsp;</h5>
+                            <h5>30000 &nbsp;<strong>VND</strong></h5>
+                        </div>
+                        <div class="d-flex">
+                            <h5>Com rang:&emsp;</h5>
+                            <h5>35000 &nbsp;<strong>VND</strong></h5>
+                        </div>
+
+                    </div>
+                    <div class="col-md-9">
+                        <!--Chat section start-->
+                        <div class="container">
+                            <h3 class=" text-center">Messaging</h3>
+
+                            <div class="messaging">
+                                <div class="inbox_msg">
+                                    <div class="mesgs">
+                                        <div class="d-flex">
+                                            <div class="incoming_msg_img me-3"> <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" alt="sunil"> </div>
+                                            <div>
+                                                <h4>Waiter</h4>
+                                            </div>
+                                        </div>
+
+
+                                        <hr />
+                                        <div class="msg_history" id="msg_container">
+
+
+                                            @foreach (MessageModel message in Model.ChatViewModel.messages)
+                                            {
+                                                @*Received*@
+                                                @if (message.UserSentId == Model.ChatViewModel.UserRecievedId)
+                                                {
+                                                    <div class="incoming_msg">
+                                                        <div class="incoming_msg_img"> <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" alt="sunil"> </div>
+                                                        <div class="received_msg">
+                                                            <div class="received_withd_msg">
+                                                                <p>
+                                                                    @message.Message
+                                                                </p>
+                                                            </div>
+                                                            <span style="font-size:8px"><em>@message.SentDate</em></span>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                @*Send*@
+                                                @if (message.UserSentId == Model.ChatViewModel.UserSentId)
+                                                {
+                                                    <div class="outgoing_msg">
+                                                        <div class="sent_msg">
+                                                            <p>
+                                                                @message.Message
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+                                        </div>
+                                        <div class="type_msg">
+                                            <div class="input_msg_write">
+                                                <input type="text" class="write_msg" id="messageInput" placeholder="Type a message" name="msg" />
+                                                <input type="hidden" class="write_msg" id="userInput" name="userSentId" value="@Model.User.Id" />
+                                                <input type="hidden" class="write_msg" id="userReceive" name="userReceiveId" value="@Model.ChatViewModel.UserRecievedId" />
+                                                <button class="msg_send_btn" id="btn_sendMsg" type="button" form="formChat"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Chat section end-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <!-- All jquery file included here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/js/ChatEvent.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/usercashhandle.js"></script>
+    <script>
+            $(document).ready(function () {
+        // Handler for .ready() called.
+        $('html, body').animate({
+            scrollTop: $('#GameSection').offset().top
+        }, 'slow');
+    });
+</script>
+</body>
+
+
+
+</html>
